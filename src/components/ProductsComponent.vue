@@ -12,7 +12,7 @@
           <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
             <p class="card-text">{{ product.description }}</p>
-            <p class="card-text">Precio: {{ product.price }}</p>
+            <p class="card-text">Precio: {{ product.price | formatPrice }}</p>
             <button class="btn btn-primary" @click="addToCart(product)">
               Agregar al carrito
             </button>
@@ -55,6 +55,11 @@ export default {
     },
     closeModal() {
       this.selectedProduct = null;
+    },
+  },
+  filters: {
+    formatPrice(value) {
+      return `CLP $${value}`;
     },
   },
 };
