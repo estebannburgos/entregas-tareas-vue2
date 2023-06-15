@@ -47,6 +47,7 @@
   cursor: pointer;
   font-size: 20px;
   font-weight: bold;
+  color: silver;
 }
   </style>
   
