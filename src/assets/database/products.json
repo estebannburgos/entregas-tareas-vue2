@@ -1,0 +1,28 @@
+[
+    { 
+        "id": 1, 
+        "name": "Donuts",
+        "picture": "https://dunkin.cl/wp-content/uploads/2022/03/Donuts-300x300.png",
+        "description": "Pieza esponjosa de repostería en forma de rosca, frita y glaseada.",
+        "price": 1500,
+        "quantity": 1
+
+    },
+    { 
+        "id": 2, 
+        "name": "Pizza", 
+        "picture": "https://s2.abcstatics.com/media/gurmesevilla/2013/04/pizza-margarita.jpg",
+        "description": "Masa horneada con queso, tomates, orégano y rúcula",
+        "price": 11990,
+        "quantity": 1
+    },
+    { 
+        "id": 3, 
+        "name": "Sushi", 
+        "picture": "https://media-cdn.tripadvisor.com/media/photo-s/0f/17/00/aa/sushi-roll.jpg",
+        "description": "Pollo Furai,California roll, Tori Panko, Palta roll y Veggie roll.",
+        "price": 7900,
+        "quantity": 1
+    }
+  ]
+  

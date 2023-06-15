@@ -1,28 +1,111 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <navbar-component
+      :cart-item-count="cartItemCount"
+      :user-avatar="userAvatar"
+      @toggle-login="toggleLogin"
+      @toggle-cart="toggleCart"
+      @logout-clicked="logout"
+    ></navbar-component>
+    <div v-if="!showLogin">
+      <products-component
+        :products="products"
+        :cart-items="cartItems"
+        @add-to-cart="addToCart"
+        @select-product="selectProduct"
+      ></products-component>
+      <shopping-cart-component
+        v-if="showCart"
+        :cart-items="cartItems"
+        :cart-subtotal="cartSubtotal"
+        :cart-total="cartTotal"
+        @toggle-cart="toggleCart"
+        @remove-item="removeItem"
+        @update-quantity="updateQuantity"
+      ></shopping-cart-component>
+    </div>
+    <login-register-component
+      v-show="showLogin" 
+      @close-login="toggleLogin"
+    ></login-register-component>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import NavbarComponent from "@/components/NavbarComponent.vue";
+import ProductsComponent from "@/components/ProductsComponent.vue";
+import ShoppingCartComponent from "@/components/ShoppingCartComponent.vue";
+import DetailProductComponent from "@/components/DetailProductComponent.vue";
+import products from "@/assets/database/products.json";
+import users from "@/assets/database/users.json";
+import LoginRegisterComponent from "@/components/LoginRegisterComponent.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    NavbarComponent,
+    ProductsComponent,
+    ShoppingCartComponent,
+    DetailProductComponent,
+    LoginRegisterComponent,
+  },
+  data() {
+    return {
+      products: products,
+      cartItems: [],
+      showCart: false,
+      showLogin: false,
+      userAvatar: "",
+      selectedProduct: null,
+    };
+  },
+  computed: {
+    cartItemCount() {
+      return this.cartItems.reduce((total, item) => total + item.quantity, 0);
+    },
+    cartSubtotal() {
+      return this.cartItems.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+      );
+    },
+    cartTotal() {
+      return this.cartSubtotal || 0;
+    },
+  },
+  methods: {
+    addToCart(product) {
+      const existingProduct = this.cartItems.find(
+        (item) => item.id === product.id
+      );
+      if (existingProduct) {
+        existingProduct.quantity++;
+      } else {
+        this.cartItems.push({ ...product, quantity: 1 });
+      }
+    },
+    toggleCart() {
+      this.showCart = !this.showCart;
+    },
+    removeItem(itemId) {
+      this.cartItems = this.cartItems.filter((item) => item.id !== itemId);
+    },
+    updateQuantity(item, quantity) {
+      item.quantity = quantity;
+    },
+    toggleLogin() {
+      this.showLogin = !this.showLogin;
+    },
+    logout() {
+      this.userAvatar = "";
+      this.showLogin = false;
+    },
+    selectProduct(product) { // Agregamos el método para seleccionar un producto
+      this.selectedProduct = product;
+    },
+    closeModal() {
+      this.selectedProduct = null; // Reiniciamos el producto seleccionado cuando se cierra el modal
+    },
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
