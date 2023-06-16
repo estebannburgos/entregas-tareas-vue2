@@ -1,20 +1,20 @@
 <template>
   <div id="app">
-    <navbar-component
+    <NavbarComponent
       :cart-item-count="cartItemCount"
       :user-avatar="userAvatar"
       @toggle-login="toggleLogin"
       @toggle-cart="toggleCart"
       @logout-clicked="logout"
-    ></navbar-component>
+    />
     <div v-if="!showLogin">
-      <products-component
+      <ProductsComponent
         :products="products"
         :cart-items="cartItems"
         @add-to-cart="addToCart"
         @select-product="selectProduct"
-      ></products-component>
-      <shopping-cart-component
+      />
+      <ShoppingCartComponent
         v-if="showCart"
         :cart-items="cartItems"
         :cart-subtotal="cartSubtotal"
@@ -22,12 +22,12 @@
         @toggle-cart="toggleCart"
         @remove-item="removeItem"
         @update-quantity="updateQuantity"
-      ></shopping-cart-component>
+      />
     </div>
-    <login-register-component
+    <LoginRegisterComponent
       v-show="showLogin" 
       @close-login="toggleLogin"
-    ></login-register-component>
+    />
   </div>
 </template>
 

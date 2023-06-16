@@ -11,8 +11,8 @@
         <div class="form-group">
           <input v-model="loginData.password" type="password" id="password" class="form-input" placeholder="Contraseña">
         </div>
-        <button v-on:click="login">Iniciar sesión</button>
-        <p>¿No tienes una cuenta aún? <button v-on:click="switchToRegistration">Regístrate aquí</button></p>
+        <button @click="login">Iniciar sesión</button>
+        <p>¿No tienes una cuenta aún? <button @click="switchToRegistration">Regístrate aquí</button></p>
         <div v-if="loginError" class="alert alert-danger">{{ loginError }}</div>
       </div>
 
@@ -33,8 +33,8 @@
         <div class="form-group">
           <input v-model="registerData.password" type="password" id="password" class="form-input" placeholder="Contraseña">
         </div>
-        <button v-on:click="register">Registrarse</button>
-        <p>¿Ya tienes una cuenta? <button v-on:click="switchToLogin">Inicia sesión aquí</button></p>
+        <button @click="register">Registrarse</button>
+        <p>¿Ya tienes una cuenta? <button @click="switchToLogin">Inicia sesión aquí</button></p>
         <div v-if="registrationError" class="alert alert-danger">{{ registrationError }}</div>
       </div>
     </div>

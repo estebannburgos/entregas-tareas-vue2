@@ -20,10 +20,10 @@
         </div>
       </div>
     </div>
-    <detail-product-component
+    <DetailProductComponent
       :selected-product="selectedProduct"
       @close-modal="closeModal"
-    ></detail-product-component>
+    />
   </div>
 </template>
 
