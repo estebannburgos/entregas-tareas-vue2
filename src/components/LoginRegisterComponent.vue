@@ -124,7 +124,6 @@ export default {
       this.registerData.email = "";
       this.registrationError = "";
 
-      // Aquí puedes realizar acciones adicionales después de registrar al usuario, si es necesario
     },
     switchToLogin() {
       this.showRegistration = false;
